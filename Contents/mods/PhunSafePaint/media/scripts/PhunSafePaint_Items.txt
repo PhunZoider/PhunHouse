@@ -1,0 +1,17 @@
+module PhunSafePaint
+{
+    imports
+    {
+        Base,
+    }
+    item RepellentPaint
+    {
+        Weight = 1.0,
+	    DisplayName = RepellentPaint,
+        Type	=	Drainable,
+	    Icon = RepellentPaint,
+        DisplayCategory = Paint,
+        UseDelta	=	0.1000,
+        cantBeConsolided = TRUE
+    } 
+}

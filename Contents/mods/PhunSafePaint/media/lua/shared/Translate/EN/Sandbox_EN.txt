@@ -1,0 +1,16 @@
+Sandbox_EN = {
+    Sandbox_PhunSafePaint = "PhunSafePaint"
+
+    Sandbox_PhunSafePaint_MinDistanceBetweenSafehouses = "Min distance",
+    Sandbox_PhunSafePaint_MinDistanceBetweenSafehouses_tooltip = "The minimum distance between safehouses",
+
+
+    Sandbox_PhunSafePaint_MinSizeForNew = "Min distance",
+    Sandbox_PhunSafePaint_MinSizeForNew_tooltip = "The minimum number of squares for a new plot (0 to prevent)",
+
+    Sandbox_PhunSafePaint_Consumption = "Consumption Rate",
+    Sandbox_PhunSafePaint_Consumption_tooltip = "Amount of paint to consumer per square",
+
+    Sandbox_PhunSafePaint_MaxTotalArea = "Max area",
+    Sandbox_PhunSafePaint_MaxTotalArea_tooltip = "The maximum area of safhouse before you cannot extend any further (0 disables)",
+}

@@ -1,0 +1,4 @@
+UI_EN = {
+    UI_PhunSafe_Create = "Create Safehouse",
+    UI_PhunSafe_Extend = "Extend Safehouse",
+}
