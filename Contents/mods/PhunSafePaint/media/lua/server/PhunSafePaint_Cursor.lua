@@ -43,7 +43,8 @@ function PhunSafePaintCursor:create(x, y, z, north, sprite)
             self.safehouse:setH(self.safehouse:getH() + 1)
         end
 
-        self.safehouse = PhunSafePaint:replaceSafehouse(self.safehouse, self.character, x, y, x2, y2)
+        self.safehouse:syncSafehouse();
+        -- self.safehouse = PhunSafePaint:replaceSafehouse(self.safehouse, self.character, x, y, x2, y2)
 
         self:refreshSafehouse()
         PhunSafePaint:highlightSafehouse(self.safehouse)
