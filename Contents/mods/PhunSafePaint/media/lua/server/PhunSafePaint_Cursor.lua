@@ -283,7 +283,6 @@ function PhunSafePaintCursor:refreshSafehouse()
             end
         end
     end
-    PhunTools:printTable(self.edges)
 end
 
 function PhunSafePaintCursor:new(character, safehouse)
