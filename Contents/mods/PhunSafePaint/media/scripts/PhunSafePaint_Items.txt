@@ -11,7 +11,7 @@ module PhunSafePaint
         Type	=	Drainable,
 	    Icon = RepellentPaint,
         DisplayCategory = Paint,
-        UseDelta	=	0.1000,
+        UseDelta	=	0.0100,
         cantBeConsolided = TRUE
     } 
 }
