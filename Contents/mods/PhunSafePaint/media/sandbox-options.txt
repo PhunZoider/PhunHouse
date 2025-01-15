@@ -1,41 +1,49 @@
 VERSION = 1,
 
-option PhunSafePaint_MinDistanceBetweenSafehouses
+option PhunSafePaint.MinDistanceBetweenSafehouses
 { 
     type = integer, 
     default = 25,
     min = 0,
     max = 100,
     page = PhunSafePaint,
-    translation = PhunSafePaint_MinDistanceBetweenSafehouses 
+    translation = PhunSafePaint_MinDistanceBetweenSafehouses ,
 }
 
-option PhunSafePaint.PhunSafePaint_MinSizeForNew
+option PhunSafePaint.MinSizeForNew
 { 
     type = integer, 
     default = 9,
     min = 0,
     max = 100,
     page = PhunSafePaint,
-    translation = PhunSafePaint_MinSizeForNew
+    translation = PhunSafePaint_MinSizeForNew,
 }
 
-option PhunSafePaint.PhunSafePaint_Consumption
+option PhunSafePaint.Consumption
 { 
     type = integer, 
     default = 1,
     min = 0,
     max = 1000,
     page = PhunSafePaint,
-    translation = PhunSafePaint_Consumption
+    translation = PhunSafePaint_Consumption,
 }
 
-option PhunSafePaint.PhunSafePaint_MaxTotalArea
+option PhunSafePaint.MaxTotalArea
 { 
     type = integer, 
     default = 100,
     min = 0,
     max = 10000,
     page = PhunSafePaint,
-    translation = PhunSafePaint_MaxTotalArea
+    translation = PhunSafePaint_MaxTotalArea,
+}
+
+option PhunSafePaint.AdminsIgnoreRestrictions
+{ 
+    type = boolean, 
+    default = true,
+    page = PhunSafePaint,
+    translation = PhunSafePaint_AdminsIgnoreRestrictions,
 }

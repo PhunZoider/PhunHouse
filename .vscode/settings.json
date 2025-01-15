@@ -4,14 +4,40 @@
         "commands": [
             {
                 "match": ".*",
-                "isAsync": true,
-                "cmd": "xcopy ${workspaceFolder}\\Contents ${env.USERPROFILE}\\Zomboid\\Workshop\\PhunSafePaint\\Contents /Y /I /E /F /EXCLUDE:xclude"
+                "cmd": "rmdir /S /Q ${env.USERPROFILE}\\Zomboid\\mods\\PhunSafePaint 2>nul"
             },
             {
-                "match": "Contents\\.*",
-                "isAsync": true,
-                "cmd": "xcopy ${workspaceFolder}\\Contents\\mods ${env.USERPROFILE}\\Zomboid\\mods /Y /I /E /F"
-            }
+                "match": ".*",
+                "cmd": "xcopy ${workspaceFolder}\\Contents\\mods ${env.USERPROFILE}\\Zomboid\\mods /Y /I /E /F /EXCLUDE:xclude"
+            },
+            {
+                "match": ".*",
+                "cmd": "xcopy ${workspaceFolder}\\Contents\\mods\\PhunSafePaint\\media ${env.USERPROFILE}\\Zomboid\\mods\\PhunSafePaint\\42\\media /Y /I /E /F"
+            },
+            {
+                "match": ".*",
+                "cmd": "copy ${workspaceFolder}\\Contents\\mods\\PhunSafePaint\\mod.info ${env.USERPROFILE}\\Zomboid\\mods\\PhunSafePaint\\42\\mod.info /Y"
+            },
+            {
+                "match": ".*",
+                "cmd": "copy ${workspaceFolder}\\Contents\\mods\\PhunSafePaint\\poster.png ${env.USERPROFILE}\\Zomboid\\mods\\PhunSafePaint\\42\\poster.png /Y"
+            },
+            {
+                "match": ".*",
+                "cmd": "copy ${workspaceFolder}\\Contents\\mods\\PhunSafePaint\\icon.png ${env.USERPROFILE}\\Zomboid\\mods\\PhunSafePaint\\42\\icon.png /Y"
+            },
+            {
+                "match": ".*",
+                "cmd": "rmdir /S /Q ${env.USERPROFILE}\\Zomboid\\Workshop\\PhunSafePaint 2>nul"
+            },
+            {
+                "match": ".*",
+                "cmd": "xcopy ${workspaceFolder} ${env.USERPROFILE}\\Zomboid\\Workshop\\PhunSafePaint /Y /I /E /F /EXCLUDE:xclude"
+            },
+            {
+                "match": ".*",
+                "cmd": "xcopy ${env.USERPROFILE}\\Zomboid\\mods\\PhunSafePaint ${env.USERPROFILE}\\Zomboid\\Workshop\\PhunSafePaint\\Contents\\mods\\PhunSafePaint /Y /I /E /F"
+            },
         ]
     },
     "editor.formatOnSave": true,

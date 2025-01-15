@@ -1,19 +1,19 @@
 require "BuildingObjects/ISBuildingObject"
 PhunSafePaintCreateCursor = ISBuildingObject:derive("PhunSafePaintCreateCursor");
-local PhunSafePaint = PhunSafePaint
+local Cursor = PhunSafePaintCreateCursor
+local PP = PhunSafePaint
 
-function PhunSafePaintCreateCursor:create(x, y, z, north, sprite)
+function Cursor:create(x, y, z, north, sprite)
 
     local sq = getWorld():getCell():getGridSquare(x, y, z)
     if self:isValid(sq) then
-        local safehouse = PhunSafePaint:createSafehouse(self.area.x, self.area.y,
-            self.area.x + (self.area.x2 - self.area.x), self.area.y + (self.area.y2 - self.area.y),
-            self.character:getUsername())
-        PhunSafePaint:highlightSafehouse(safehouse)
+        local safehouse = PP:createSafehouse(self.area.x, self.area.y, self.area.x + (self.area.x2 - self.area.x),
+            self.area.y + (self.area.y2 - self.area.y), self.character:getUsername())
+        PP:highlightSafehouse(safehouse)
     end
 end
 
-function PhunSafePaintCreateCursor:walkTo(x, y, z)
+function Cursor:walkTo(x, y, z)
     if ISBuildMenu.cheat then
         return true
     end
@@ -22,12 +22,12 @@ function PhunSafePaintCreateCursor:walkTo(x, y, z)
     return luautils.walkAdj(playerObj, square, true)
 end
 
-function PhunSafePaintCreateCursor:setArea(square)
+function Cursor:setArea(square)
     self.renderX = square:getX()
     self.renderY = square:getY()
     self.renderZ = square:getZ()
 
-    local a = math.floor(math.sqrt(SandboxVars.PhunSafePaint.PhunSafePaint_MinSizeForNew or 9))
+    local a = math.floor(math.sqrt(PP.settings.MinSizeForNew or 9))
     local even = a % 2 == 0
 
     local area = {
@@ -44,12 +44,12 @@ function PhunSafePaintCreateCursor:setArea(square)
         area.y2 = area.y + a
     end
     self.area = area
-    self.squares = PhunSafePaint:getSafehouseSquares(area)
-    self.squareInfo = PhunSafePaint:squaresDistanceToNextSafehouse(self.squares, self.character)
+    self.squares = PP:getSafehouseSquares(area)
+    self.squareInfo = PP:squaresDistanceToNextSafehouse(self.squares, self.character)
     return self.area
 end
 
-function PhunSafePaintCreateCursor:isValid(square)
+function Cursor:isValid(square)
 
     if self.lastDirectionInfo and not self.lastDirectionInfo.enabled then
         return false
@@ -69,7 +69,7 @@ function PhunSafePaintCreateCursor:isValid(square)
 
 end
 
-function PhunSafePaintCreateCursor:getDirection(x, y)
+function Cursor:getDirection(x, y)
     for k, v in pairs(self.edges) do
         if x >= v.x and x <= v.x2 and y >= v.y and y <= v.y2 then
             return k, v
@@ -77,7 +77,7 @@ function PhunSafePaintCreateCursor:getDirection(x, y)
     end
 end
 
-function PhunSafePaintCreateCursor:render(x, y, z, square)
+function Cursor:render(x, y, z, square)
 
     if not self.floorSprite then
         self.floorSprite = IsoSprite.new()
@@ -91,7 +91,7 @@ function PhunSafePaintCreateCursor:render(x, y, z, square)
 
     local area = self:setArea(square)
 
-    local distance = PhunSafePaint:getEdgeDistances(area, self.character)
+    local distance = PP:getEdgeDistances(area, self.character)
 
     local uses = self.character:getInventory():getUsesTypeRecurse("RepellentPaint")
     -- local squarez = self.squares
@@ -104,7 +104,7 @@ function PhunSafePaintCreateCursor:render(x, y, z, square)
             self.floorSprite:RenderGhostTileColor(v:getX(), v:getY(), 0, hc:getR(), hc:getG(), hc:getB(), 0.8)
         else
             if not info.enabled then
-                local text = "Too close to another safehouse"
+                local text = getText("UI_PhunSafe_Err_Too_Close_To_Existing")
                 HaloTextHelper.addText(self.character, text, HaloTextHelper.getColorRed())
             end
             self.floorSprite:RenderGhostTileColor(v:getX(), v:getY(), 0, bc:getR(), bc:getG(), bc:getB(), 0.8)
@@ -151,11 +151,11 @@ function PhunSafePaintCreateCursor:render(x, y, z, square)
     end
 end
 
-function PhunSafePaintCreateCursor:deactivate()
-    PhunSafePaint:removeHighlight()
+function Cursor:deactivate()
+    -- PP:safehouseRemoveHighlight()
 end
 
-function PhunSafePaintCreateCursor:getObjectList()
+function Cursor:getObjectList()
     local square = getCell():getGridSquare(self.renderX, self.renderY, self.renderZ)
     if not square then
         return {}
@@ -168,7 +168,7 @@ function PhunSafePaintCreateCursor:getObjectList()
     return objects
 end
 
-function PhunSafePaintCreateCursor:new(character)
+function Cursor:new(character)
     local o = {}
     setmetatable(o, self)
     self.__index = self
