@@ -5,9 +5,7 @@ local Action = PhunSpawnActionPaint
 
 function Action:isValid()
     -- am I in range?
-    if self.character:getSquare() ~= self.square then
-        return false
-    end
+
     -- do I have enough paint
 
     -- is area valid
@@ -37,6 +35,13 @@ function Action:perform()
             w = self.area.x2 - self.area.x,
             h = self.area.y2 - self.area.y
         })
+
+        for _, v in ipairs(self.boundary or {}) do
+            for i = 1, (PP.settings.Consumption or 1) do
+                local item = self.character:getInventory():getFirstTypeRecurse("RepellentPaint")
+                item:Use()
+            end
+        end
     end
     self.safehouse = PhunSafePaint:resizeByOwner(self.safehouse:getOwner(), self.area.x, self.area.y,
         self.area.x2 - self.area.x, self.area.y2 - self.area.y)
@@ -48,12 +53,12 @@ function Action:perform()
     ISBaseTimedAction.perform(self);
 end
 
-function Action:new(player, square, area, safehouse, refreshCallback, time)
+function Action:new(player, area, safehouse, boundary, refreshCallback, time)
     local o = {}
     setmetatable(o, self)
     self.__index = self
-    o.square = square
     o.refreshCallback = refreshCallback
+    o.boundary = boundary
     o.player = player:getPlayerNum();
     o.character = player
     o.stopOnWalk = true;

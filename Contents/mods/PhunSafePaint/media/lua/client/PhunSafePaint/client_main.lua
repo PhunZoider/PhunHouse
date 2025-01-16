@@ -88,3 +88,35 @@ function PP:highlightClosestSafehouse(playerObj, remove)
         self:highlightSafehouse(safehouse, remove)
     end
 end
+
+function PP:playerHasEnoughPaintForBoundary(playerObj, boundary)
+    local uses = playerObj:getInventory():getUsesTypeRecurse("RepellentPaint") or 0
+    for _, v in ipairs(boundary or {}) do
+        uses = uses - (PP.settings.Consumption or 1)
+    end
+    return uses >= 0
+end
+
+function PP:boundaryIsValid(playerObj, boundary)
+    local uses = playerObj:getInventory():getUsesTypeRecurse("RepellentPaint") or 0
+
+    local tooClose = false
+    local blockedZone = false
+
+    for _, v in ipairs(boundary) do
+        if not v.enabled then
+            return false
+        end
+        if uses <= 0 then
+            return false
+        end
+        if v.errDistance then
+            return false
+        end
+        if v.errZoneSafehouse then
+            return false
+        end
+        uses = uses - (PP.settings.Consumption or 1)
+    end
+    return true
+end
