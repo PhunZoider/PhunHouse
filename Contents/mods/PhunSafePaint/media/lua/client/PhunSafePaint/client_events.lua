@@ -5,17 +5,6 @@ local Commands = require("PhunSafePaint/client_commands")
 require("PhunSafePaint/context")
 local PP = PhunSafePaint
 
-Events.OnPlayerMove.Add(function(playerObj)
-    if PP.isHighlighted then
-        -- are we still in area?
-        local x, y = playerObj:getX(), playerObj:getY()
-        local area = PP.highlightedArea
-        if x < (area.x - 10) or x > (area.x2 + 10) or y < (area.y - 10) or y > (area.y2 + 10) then
-            PP:highlightClosestSafehouse(playerObj, true)
-        end
-    end
-end)
-
 Events.OnServerCommand.Add(function(module, command, args)
     if module == PP.name and Commands[command] then
         Commands[command](args)
@@ -35,10 +24,8 @@ Events.OnFillInventoryObjectContextMenu.Add(function(playerNum, context, items)
 
         if item then
             local itemType = item:getType()
-            if itemType == "RepellentPaint" then
-
+            if itemType == "SafetyPaint" then
                 PP:doPaintContext(playerObj, context, playerObj:getX(), playerObj:getY(), playerObj:getZ())
-
             end
         end
     end

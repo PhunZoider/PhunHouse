@@ -2,16 +2,22 @@ module PhunSafePaint
 {
     imports
     {
-        Base,
+        Base
     }
-    item RepellentPaint
-    {
-        Weight = 1.0,
-	    DisplayName = RepellentPaint,
-        Type	=	Drainable,
-	    Icon = RepellentPaint,
-        DisplayCategory = Paint,
-        UseDelta	=	0.0100,
-        cantBeConsolided = TRUE
-    } 
+
+    item SafetyPaint
+	{
+	    DisplayCategory = Paint,
+		Weight	=	5,
+		Type	=	Drainable,
+		ReplaceOnDeplete = PaintbucketEmpty,
+		UseWhileEquipped	=	FALSE,
+		UseDelta	=	0.01,
+		DisplayName	=	Safety Paint,
+		Icon	=	Paint_Red,
+		Tooltip = Tooltip_SafetyPaint,
+		StaticModel = Bucket,
+		WorldStaticModel = PaintTinRed_Ground,
+	}
+
 }

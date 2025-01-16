@@ -4,17 +4,26 @@ end
 
 local PP = PhunSafePaint
 
-function PP:highlightSafehouse(safehouse)
-    self:safehouseRemoveHighlight(safehouse)
-    self.safehouse = safehouse
-    self.isHighlighted = true
-    self.highlightedArea = {
-        x = safehouse:getX(),
-        y = safehouse:getY(),
-        x2 = safehouse:getX() + safehouse:getW(),
-        y2 = safehouse:getY() + safehouse:getH()
-    }
-    local squares = self:getSafehouseSquares(safehouse)
+local currentlyHighlighted = {}
+
+local function watchHighlight()
+    for playerObj, safehouse in pairs(currentlyHighlighted or {}) do
+        local x, y = playerObj:getX(), playerObj:getY()
+        local area = PP.getAreaOfSafehouse(safehouse)
+        if x < (area.x - 10) or x > (area.x2 + 10) or y < (area.y - 10) or y > (area.y2 + 10) then
+            PP.highlight(playerObj, false)
+            Events.EveryOneMinute.Remove(watchHighlight)
+        end
+    end
+end
+
+function PP.highlight(safehouse, remove)
+
+    if not safehouse then
+        return
+    end
+
+    PP.isHighlighted = not remove
 
     local c = {
         a = 0.5,
@@ -22,88 +31,48 @@ function PP:highlightSafehouse(safehouse)
         g = 0,
         b = 0
     };
-    for _, square in ipairs(squares) do
+
+    for _, square in ipairs(PP.getSafehouseSquares(safehouse) or {}) do
         local objects = square:getObjects();
         for j = 0, objects:size() - 1 do
             local obj = objects:get(j);
-            obj:setHighlighted(true, false);
-            obj:setHighlightColor(c.r, c.g, c.b, c.a);
+            if remove ~= true then
+                obj:setHighlighted(true, false);
+                obj:setHighlightColor(c.r, c.g, c.b, c.a);
+            else
+                obj:setHighlighted(false, false);
+                obj:setHighlightColor(c.r, c.g, c.b, c.a);
+            end
+
         end
     end
 
 end
 
-function PP:xyzToSquares(xyzs)
-    local squares = ArrayList.new();
-    for _, xyz in ipairs(xyzs or {}) do
-        local square = getSquare(xyz.x, xyz.y, xyz.z or 0)
-        if square then
-            squares:add(square);
-        end
+function PP.highlightClosest(playerObj)
+    if currentlyHighlighted[playerObj] then
+        PP.highlight(currentlyHighlighted[playerObj], true)
+        currentlyHighlighted[playerObj] = nil
+        Events.EveryOneMinute.Remove(watchHighlight)
     end
-    return squares;
-end
-
-function PP:removeHighlightedArea(xyzs)
-    local squares = self:xyzToSquares(xyzs);
-    if squares:size() > 0 then
-        self:removeHighlightedSquares(squares);
-    end
-end
-
-function PP:boxToSquares(x1, x2, y1, y2)
-    local area = {}
-
-    for i = x1, x2 do
-        for j = y1, y2 do
-            table.insert(area, getSquare(i, j, 0))
-        end
-    end
-
-    return area
-
-end
-
-function PP:safehouseRemoveHighlight(safehouse)
-
-    local area = {
-        x = safehouse:getX(),
-        y = safehouse:getY(),
-        x2 = safehouse:getX() + safehouse:getW(),
-        y2 = safehouse:getY() + safehouse:getH()
-    }
-    local squares = self:boxToSquares(area.x, area.x2, area.y, area.y2)
-    for _, square in ipairs(squares) do
-        local objects = square:getObjects();
-        for j = 0, objects:size() - 1 do
-            local obj = objects:get(j);
-            obj:setHighlighted(false, false);
-        end
-    end
-end
-
-function PP:highlightClosestSafehouse(playerObj, remove)
-    local safehouse = self:getClosestPlayerSafehouse(playerObj)
+    local safehouse = PP.getClosest(playerObj)
     if safehouse then
-        self:highlightSafehouse(safehouse, remove)
+        currentlyHighlighted[playerObj] = safehouse
+        Events.EveryOneMinute.Add(watchHighlight)
     end
+    PP.highlight(safehouse)
 end
 
-function PP:playerHasEnoughPaintForBoundary(playerObj, boundary)
-    local uses = playerObj:getInventory():getUsesTypeRecurse("RepellentPaint") or 0
-    for _, v in ipairs(boundary or {}) do
-        uses = uses - (PP.settings.Consumption or 1)
-    end
-    return uses >= 0
-end
-
-function PP:boundaryIsValid(playerObj, boundary)
-    local uses = playerObj:getInventory():getUsesTypeRecurse("RepellentPaint") or 0
-
+function PP.isValidArea(playerObj, areas)
+    local uses = playerObj:getInventory():getUsesTypeRecurse("SafetyPaint") or 0
     local tooClose = false
     local blockedZone = false
 
-    for _, v in ipairs(boundary) do
+    if #areas > PP.settings.MaxTotalArea then
+        return false
+    end
+
+    for _, v in ipairs(areas) do
         if not v.enabled then
             return false
         end

@@ -2,16 +2,20 @@ UI_EN = {
     UI_PhunSafe_Create = "Create Safehouse",
     UI_PhunSafe_Create_Tooltip = "Create a new safehouse here where you are set as the owner",
     UI_PhunSafe_Create_Tooltip_Err_Already_Own = "You already own a safehouse",
+    UI_PhunSafe_Create_Tooltip_Err_Max_Owned = "You cannot create any more safehouses",
     UI_PhunSafe_Create_Tooltip_Err_TooClose = "You are too close to another safehouse",
     UI_PhunSafe_Extend = "Extend Safehouse",
     UI_PhunSafe_Extend_Tooltip = "Extend the size of this Safehouse",
-    UI_PhunSafe_Extend_Tooltip_Err_No_Safehouse = "You are not a member of any valid safehouse",
+    UI_PhunSafe_Extend_Tooltip_Err_No_Safehouse = "You are not part of any valid safehouse",
     UI_PhunSafe_Extend_Tooltip_Err_Get_Closer = "You need to be closer to the safehouse you wish to expand",
     UI_PhunSafe_Extend_Tooltip_Err_Not_Member = "You are not a member of this safehouse",
     UI_PhunSafe_Err_Insufficinet_Paint = "Insufficient paint",
+    UI_PhunSafe_Err_Max_Size = "Area is too large",
 
     UI_PhunSafe_Err_Too_Close_To_Existing = "Too close to another safehouse"
     UI_PhunSafe_Err_Extend = "You cannot extend here"
     UI_PhunSafe_Err_Create = "You cannot create a safehouse here"
     UI_PhunSafe_Err_Blocked = "Overlaps with a blocked area"
+    
+
 }

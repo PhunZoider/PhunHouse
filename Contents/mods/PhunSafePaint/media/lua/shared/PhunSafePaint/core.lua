@@ -20,7 +20,7 @@ for _, event in pairs(Core.events) do
     end
 end
 
-function Core:debug(...)
+function Core.debug(...)
 
     local args = {...}
     for i, v in ipairs(args) do
@@ -33,12 +33,12 @@ function Core:debug(...)
 
 end
 
-function Core:printTable(t, indent)
+function Core.printTable(t, indent)
     indent = indent or ""
     for key, value in pairs(t or {}) do
         if type(value) == "table" then
             print(indent .. key .. ":")
-            Core:printTable(value, indent .. "  ")
+            Core.printTable(value, indent .. "  ")
         elseif type(value) ~= "function" then
             print(indent .. key .. ": " .. tostring(value))
         end

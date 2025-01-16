@@ -20,6 +20,16 @@ option PhunSafePaint.MinSizeForNew
     translation = PhunSafePaint_MinSizeForNew,
 }
 
+option PhunSafePaint.MaxNumberOfOwned
+{ 
+    type = integer, 
+    default = 1,
+    min = 0,
+    max = 1000,
+    page = PhunSafePaint,
+    translation = PhunSafePaint_MaxNumberOfOwned,
+}
+
 option PhunSafePaint.Consumption
 { 
     type = integer, 

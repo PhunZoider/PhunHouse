@@ -16,4 +16,7 @@ Sandbox_EN = {
 
     Sandbox_PhunSafePaint_AdminsIgnoreRestrictions= "Admins ignore restrictions",
     Sandbox_PhunSafePaint_AdminsIgnoreRestrictions_tooltip = "Admins ignore any distance/ownership/zone restrictions",
+
+    Sandbox_PhunSafePaint_MaxNumberOfOwned= "Max Safehouses",
+    Sandbox_PhunSafePaint_MaxNumberOfOwned_tooltip = "Maximum number of safehouses a player can be owner of",
 }

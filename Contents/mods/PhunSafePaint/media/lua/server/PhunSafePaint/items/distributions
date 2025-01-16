@@ -2,11 +2,11 @@ require 'Items/SuburbsDistributions'
 require 'Vehicles/VehicleDistributions'
 require "Items/ProceduralDistributions"
 -- ArtSupplies
-table.insert(ProceduralDistributions.list["ArtSupplies"].items, "PhunSafePaint.RepellentPaint");
+table.insert(ProceduralDistributions.list["ArtSupplies"].items, "PhunSafePaint.SafetyPaint");
 table.insert(ProceduralDistributions.list["ArtSupplies"].items, 2.5);
 -- CratePaint
-table.insert(ProceduralDistributions.list["ArtSupplies"].items, "PhunSafePaint.RepellentPaint");
+table.insert(ProceduralDistributions.list["ArtSupplies"].items, "PhunSafePaint.SafetyPaint");
 table.insert(ProceduralDistributions.list["ArtSupplies"].items, 2.5);
 -- ToolStoreMisc
-table.insert(ProceduralDistributions.list["ToolStoreMisc"].items, "PhunSafePaint.RepellentPaint");
+table.insert(ProceduralDistributions.list["ToolStoreMisc"].items, "PhunSafePaint.SafetyPaint");
 table.insert(ProceduralDistributions.list["ToolStoreMisc"].items, 2.5);

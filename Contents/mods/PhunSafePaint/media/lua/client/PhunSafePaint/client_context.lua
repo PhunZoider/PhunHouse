@@ -3,15 +3,6 @@ if isServer() then
 end
 local PP = PhunSafePaint
 
-function PP:getNearestSafehouse(playerObj, x, y, limit)
-    -- if ther isn't one within this many blocks, don't bother
-    limit = limit or 50 -- default to 50
-    local data = self:getClosestPlayerSafehouseDistance(playerObj)
-    if data and (data.distance or 0) < limit then
-        return data.safehouse
-    end
-end
-
 function PP:doPaintContext(player, context, x, y, z)
 
     local playerObj = nil
@@ -21,33 +12,46 @@ function PP:doPaintContext(player, context, x, y, z)
         playerObj = getSpecificPlayer(player)
     end
 
-    local closest = self:getClosestSafehouseTo(x, y)
+    local closest = PP.getClosest(playerObj)
+    local houses = PP.getPlayerSafehouses(playerObj, true)
 
-    local canCreate = self:canCreateHere(playerObj, x, y)
+    local canCreate = true
+    local cannotCreateReasons = nil
+    if not PP:canIgnore() then
 
-    local memberOf = closest and self:playerIsMemberOf(closest, playerObj)
+        if houses and PP.settings.MaxNumberOfOwned > 0 and #houses >= PP.settings.MaxNumberOfOwned then
+            cannotCreateReasons = getText("UI_PhunSafe_Create_Tooltip_Err_Max_Owned")
+        end
+        if closest then
+            local distance = PP.getDistanceOfSafehouse(playerObj:getX(), playerObj:getY(), closest)
+            if distance <= PP.settings.MinDistanceBetweenSafehouses then
+                cannotCreateReasons = getText("UI_PhunSafe_Create_Tooltip_Err_TooClose")
+            end
+        end
+    end
+
     local option = context:addOptionOnTop(getText("UI_PhunSafe_Create"), playerObj, function()
         local bo = PhunSafePaintCreateCursor:new(playerObj)
         getCell():setDrag(bo, bo.player)
     end)
     local toolTip = ISToolTip:new();
     toolTip:setVisible(false);
-    toolTip:setName("Create Safehouse");
-    option.notAvailable = not canCreate
-    if not canCreate then
-        toolTip.description = "You cannot create a safehouse here"
+    toolTip:setName(getText("UI_PhunSafe_Create"));
+    option.notAvailable = cannotCreateReasons ~= nil
+    if cannotCreateReasons ~= nil then
+        toolTip.description = cannotCreateReasons
     else
-        toolTip.description = "Create a new safehouse here where you are set as the owner"
+        toolTip.description = getText("UI_PhunSafe_Create_Tooltip")
     end
     option.toolTip = toolTip;
 
     local toolTipText = getText("UI_PhunSafe_Extend_Tooltip")
     local toolTipEnabled = true
 
-    if closest then
-        local distance, closestX, closestY = self:getDistanceFromPlayer(closest, playerObj)
+    if closest and houses then
+        local distance = PP.getDistanceOfSafehouse(playerObj:getX(), playerObj:getY(), closest)
 
-        if not self:playerIsMemberOf(closest, playerObj) and not self:canIgnore() then
+        if not PP.playerIsMemberOf(closest, playerObj) and not PP:canIgnore() then
             -- not a member
             toolTipText = getText("UI_PhunSafe_Extend_Tooltip_Err_Not_Member")
             toolTipEnabled = false
@@ -58,14 +62,19 @@ function PP:doPaintContext(player, context, x, y, z)
             toolTipEnabled = false
 
         end
-
+    elseif not houses then
+        toolTipText = getText("UI_PhunSafe_Extend_Tooltip_Err_No_Safehouse")
+        toolTipEnabled = false
+    else
+        toolTipText = getText("UI_PhunSafe_Extend_Tooltip_Err_Get_Closer")
+        toolTipEnabled = false
     end
 
     local option = context:addOptionOnTop(getText("UI_PhunSafe_Extend"), playerObj, function()
         if closest then
             local square = playerObj:getCurrentSquare()
-            PP:highlightSafehouse(closest)
-            local area = PP:getAreaOfSafehouse(closest)
+            PP.highlight(closest)
+            local area = PP.getAreaOfSafehouse(closest)
             if area then
                 local bo = PhunSafePaintCursor:new(playerObj, closest)
                 getCell():setDrag(bo, bo.player)
