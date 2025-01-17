@@ -1,8 +1,12 @@
 version=1
-title=PhunSafePaint
-description=Allow players to create and extend their safehouse.
+title=PhunHouse - Safehouse Tools
+description=[H1]Give your community the power of safehouse control[/H1]
+description=[hr][/hr] 
+description=[list][*]Allow players to create their own safehouse, even if it isn't a building![*]Allow players to extend their existing safehouse using [b]House Paint[/b][*]Allow players to have more than one safehouse[/list]
 description=
-description=beta testing! Currently play testing and balance tweaking on [url=https://discord.gg/v2USyAtP6q]PhunZoid Server[/url]
-description=[url=https://github.com/PhunZoider/PhunSafePaint]Repo and more info[/url]
-tags=Build 41
-visibility=unlisted
+description=Made for B41 and B42 ready (for when MP is released)
+description=Discovering [b]House Paint[/b] in the world will enable players to create or extend safehouses depending on your settings
+description=Coded for our community at [url=https://discord.gg/v2USyAtP6q]PhunZoid[/url].
+description=[url=https://github.com/PhunZoider/PhunHouse]Repo and more info[/url]
+tags=Build 41, Build 42
+visibility=public

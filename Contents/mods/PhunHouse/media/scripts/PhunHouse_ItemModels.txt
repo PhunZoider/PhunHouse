@@ -1,0 +1,9 @@
+module Base
+{
+    model PaintHouse_Ground
+    {
+        mesh = WorldItems/PaintTin,
+        texture = WorldItems/PaintHouse,
+        scale = 0.4,
+    }
+}

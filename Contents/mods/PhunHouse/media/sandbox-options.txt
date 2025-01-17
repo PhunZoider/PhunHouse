@@ -1,0 +1,59 @@
+VERSION = 1,
+
+option PhunHouse.MinDistanceBetweenSafehouses
+{ 
+    type = integer, 
+    default = 25,
+    min = 0,
+    max = 100,
+    page = PhunHouse,
+    translation = PhunHouse_MinDistanceBetweenSafehouses,
+}
+
+option PhunHouse.MinSizeForNew
+{ 
+    type = integer, 
+    default = 9,
+    min = 0,
+    max = 100,
+    page = PhunHouse,
+    translation = PhunHouse_MinSizeForNew,
+}
+
+option PhunHouse.MaxNumberOfOwned
+{ 
+    type = integer, 
+    default = 1,
+    min = 0,
+    max = 1000,
+    page = PhunHouse,
+    translation = PhunHouse_MaxNumberOfOwned,
+}
+
+option PhunHouse.Consumption
+{ 
+    type = integer, 
+    default = 1,
+    min = 0,
+    max = 1000,
+    page = PhunHouse,
+    translation = PhunHouse_Consumption,
+}
+
+option PhunHouse.MaxTotalArea
+{ 
+    type = integer, 
+    default = 100,
+    min = 0,
+    max = 10000,
+    page = PhunHouse,
+    translation = PhunHouse_MaxTotalArea,
+}
+
+option PhunHouse.AdminsIgnoreRestrictions
+{ 
+    type = boolean, 
+    default = true,
+    page = PhunHouse,
+    translation = PhunHouse_AdminsIgnoreRestrictions,
+}

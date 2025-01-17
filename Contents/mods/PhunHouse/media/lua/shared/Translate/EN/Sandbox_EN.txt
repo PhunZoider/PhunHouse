@@ -1,0 +1,22 @@
+Sandbox_EN = {
+    Sandbox_PhunHouse = "PhunHouse"
+
+    Sandbox_PhunHouse_MinDistanceBetweenSafehouses = "Min distance",
+    Sandbox_PhunHouse_MinDistanceBetweenSafehouses_tooltip = "The minimum distance between safehouses",
+
+
+    Sandbox_PhunHouse_MinSizeForNew = "Min size",
+    Sandbox_PhunHouse_MinSizeForNew_tooltip = "The minimum number of squares for a new plot (0 to prevent)",
+
+    Sandbox_PhunHouse_Consumption = "Consumption Rate",
+    Sandbox_PhunHouse_Consumption_tooltip = "Amount of paint to consumer per square",
+
+    Sandbox_PhunHouse_MaxTotalArea = "Max area",
+    Sandbox_PhunHouse_MaxTotalArea_tooltip = "The maximum area of safhouse before you cannot extend any further (0 disables)",
+
+    Sandbox_PhunHouse_AdminsIgnoreRestrictions= "Admins ignore restrictions",
+    Sandbox_PhunHouse_AdminsIgnoreRestrictions_tooltip = "Admins ignore any distance/ownership/zone restrictions",
+
+    Sandbox_PhunHouse_MaxNumberOfOwned= "Max Safehouses",
+    Sandbox_PhunHouse_MaxNumberOfOwned_tooltip = "Maximum number of safehouses a player can be owner of",
+}

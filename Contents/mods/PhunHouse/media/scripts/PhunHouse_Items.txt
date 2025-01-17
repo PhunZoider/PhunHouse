@@ -1,0 +1,23 @@
+module Base
+{
+    imports
+    {
+        Base
+    }
+
+    item HousePaint
+	{
+	    DisplayCategory = Paint,
+		Weight	=	5,
+		Type	=	Drainable,
+		ReplaceOnDeplete = PaintbucketEmpty,
+		UseWhileEquipped	=	FALSE,
+		UseDelta	=	0.01,
+		DisplayName	=	House Paint,
+		Icon	=	Paint_Red,
+		Tooltip = Tooltip_HousePaint,
+		StaticModel = Bucket,
+		WorldStaticModel = PaintHouse_Ground,
+	}
+
+}

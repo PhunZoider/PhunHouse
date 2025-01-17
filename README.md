@@ -5,14 +5,14 @@ A Project Zomboid mod for enhancing the Safehouse system
 ## Features
 
 - Players can create their own safehouse, even if it isn't a house!
-- Players can extend their existing safehouse using Safety Paint
+- Players can extend their existing safehouse using `House Paint`
 - Allow players to have multiple safehouses
 
 ## Gameplay
 
-Safehouses can be created as normal in game (though in PZ you can only do this once). Alternatively (or additionally) you can also create a safehouse from scratch by finding and using "Safety Paint" (found in the world where you generally find paint).
+Safehouses can be created as normal in game (though in PZ you can only do this once). Alternatively (or additionally) you can also create a safehouse from scratch by finding and using "House Paint" (found in the world where you generally find paint).
 
-Right clicking Safety Paint will give you 2 options:
+Right clicking House Paint will give you 2 options:
 
 ### Create Safehouse
 
@@ -25,5 +25,3 @@ This option will be available whenever you are close enough to a safehouse you a
 ## Phun
 
 Have Phun
-
-
