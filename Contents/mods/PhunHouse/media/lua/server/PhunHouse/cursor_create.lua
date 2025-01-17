@@ -11,16 +11,16 @@ function Cursor:create(x, y, z, north, sprite)
     getWorld():getCell():setDrag(nil, 0);
 end
 
-function Cursor:walkTo(x, y, z)
+-- function Cursor:walkTo(x, y, z)
 
-    local square = getSquare(x, y, z or 0)
+--     local square = getSquare(x, y, z or 0)
 
-    -- walk to the square
-    ISTimedActionQueue.add(ISWalkToTimedAction:new(self.character, square))
+--     -- walk to the square
+--     ISTimedActionQueue.add(ISWalkToTimedAction:new(self.character, square))
 
-    -- paint the area
-    ISTimedActionQueue.add(PhunSpawnActionCreate:new(self.character, self.area, 20))
-end
+--     -- paint the area
+--     ISTimedActionQueue.add(PhunSpawnActionCreate:new(self.character, self.area, 20))
+-- end
 
 function Cursor:setArea(square)
     self.renderX = square:getX()
@@ -82,7 +82,10 @@ function Cursor:render(x, y, z, square)
         self.floorSprite = IsoSprite.new()
         self.floorSprite:LoadFramesNoDirPageSimple('media/ui/FloorTileCursor.png')
     end
-
+    local md = self.character:getModData().PhunHouse
+    if md then
+        md.when = getTimestamp()
+    end
     local area = self:setArea(square)
 
     local uses = self.character:getInventory():getUsesTypeRecurse("HousePaint")
@@ -137,6 +140,7 @@ function Cursor:new(character)
     o.renderX = -1
     o.renderY = -1
     o.renderZ = -1
+    o.skipBuildAction = true
     return o
 end
 

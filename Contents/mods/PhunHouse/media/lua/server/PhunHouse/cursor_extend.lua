@@ -64,39 +64,39 @@ function Cursor:getBoundary(x, y)
     end
 end
 
-function Cursor:walkTo(x, y, z)
+-- function Cursor:walkTo(x, y, z)
 
-    local square = getSquare(x, y, z or 0)
-    local boundary = self:getBoundary(x, y)
-    self.area = {
-        x = self.safehouse:getX(),
-        y = self.safehouse:getY(),
-        x2 = self.safehouse:getX2(),
-        y2 = self.safehouse:getY2()
-    }
+--     local square = getSquare(x, y, z or 0)
+--     local boundary = self:getBoundary(x, y)
+--     self.area = {
+--         x = self.safehouse:getX(),
+--         y = self.safehouse:getY(),
+--         x2 = self.safehouse:getX2(),
+--         y2 = self.safehouse:getY2()
+--     }
 
-    if square:getX() >= self.safehouse:getX2() then
-        -- assert we are growing to the right
-        self.area.x2 = self.area.x2 + 1
-    elseif square:getX() <= self.safehouse:getX() then
-        -- assert we are growing to the left
-        self.area.x = self.area.x - 1
-    elseif square:getY() >= self.safehouse:getY2() then
-        -- assert we are growing to the bottom
-        self.area.y2 = self.area.y2 + 1
-    elseif square:getY() <= self.safehouse:getY() then
-        -- assert we are growing to the top
-        self.area.y = self.area.y - 1
-    end
+--     if square:getX() >= self.safehouse:getX2() then
+--         -- assert we are growing to the right
+--         self.area.x2 = self.area.x2 + 1
+--     elseif square:getX() <= self.safehouse:getX() then
+--         -- assert we are growing to the left
+--         self.area.x = self.area.x - 1
+--     elseif square:getY() >= self.safehouse:getY2() then
+--         -- assert we are growing to the bottom
+--         self.area.y2 = self.area.y2 + 1
+--     elseif square:getY() <= self.safehouse:getY() then
+--         -- assert we are growing to the top
+--         self.area.y = self.area.y - 1
+--     end
 
-    -- walk to the square
-    ISTimedActionQueue.add(ISWalkToTimedAction:new(self.character, square))
-    ISTimedActionQueue.add(PhunSpawnActionCreate:new(self.character, self.area, 20))
-    -- paint the area
-    -- ISTimedActionQueue.add(PhunSpawnActionPaint:new(self.character, area, self.safehouse, boundary, function()
-    --     self:refreshSafehouse()
-    -- end, 20))
-end
+--     -- walk to the square
+--     ISTimedActionQueue.add(ISWalkToTimedAction:new(self.character, square))
+--     --ISTimedActionQueue.add(PhunSpawnActionCreate:new(self.character, self.area, 20))
+--     -- paint the area
+--     -- ISTimedActionQueue.add(PhunSpawnActionPaint:new(self.character, area, self.safehouse, boundary, function()
+--     --     self:refreshSafehouse()
+--     -- end, 20))
+-- end
 
 function Cursor:isValid(square)
 
@@ -112,7 +112,10 @@ function Cursor:render(x, y, z, square)
         self.floorSprite = IsoSprite.new()
         self.floorSprite:LoadFramesNoDirPageSimple('media/ui/FloorTileCursor.png')
     end
-
+    local md = self.character:getModData().PhunHouse
+    if md then
+        md.when = getTimestamp()
+    end
     local boundary = self:getBoundary(x, y)
 
     if not boundary then

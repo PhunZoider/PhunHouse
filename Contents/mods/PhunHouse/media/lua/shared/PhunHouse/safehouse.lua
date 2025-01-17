@@ -14,7 +14,7 @@ function Core.getSafehouseByOwner(owner, x, y)
     local player = type(owner) == "string" and getPlayerFromUsername(owner) or owner
     local houses = Core.getPlayerSafehouses(player, true)
 
-    if #houses == 0 then
+    if houses == nil or #houses == 0 then
         return nil
     end
     if #houses == 1 then
