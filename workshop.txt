@@ -1,12 +1,17 @@
 version=1
-title=PhunHouse - Safehouse Tools
-description=[H1]Give your community the power of safehouse control[/H1]
-description=[hr][/hr] 
+id=3409280818
+title=PhunHouse - Safehouse Expander
+description=[H1]Self Serve Safety![/H1]
+description=[hr][/hr]
+description=With PhunHouse, you can:
 description=[list][*]Allow players to create their own safehouse, even if it isn't a building![*]Allow players to extend their existing safehouse using [b]House Paint[/b][*]Allow players to have more than one safehouse[/list]
 description=
-description=Made for B41 and B42 ready
+description=Made for B41 and techinically B42 ready?
+description=
 description=Discovering [b]House Paint[/b] in the world will enable players to create or extend safehouses depending on your settings
+description=
 description=Coded with love for our awesome [url=https://discord.gg/v2USyAtP6q]PhunZoid[/url] community.
+description=
 description=[url=https://github.com/PhunZoider/PhunHouse]Repo and more info[/url]
-tags=Build 41, Build 42
+tags=
 visibility=public
