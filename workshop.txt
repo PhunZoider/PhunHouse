@@ -10,8 +10,6 @@ description=Made for B41 and techinically B42 ready?
 description=
 description=Discovering [b]House Paint[/b] in the world will enable players to create or extend safehouses depending on your settings
 description=
-description=Coded with love for our awesome [url=https://discord.gg/v2USyAtP6q]PhunZoid[/url] community.
-description=
-description=[url=https://github.com/PhunZoider/PhunHouse]Repo and more info[/url]
+description=Coded with love for our awesome [url=https://discord.gg/v2USyAtP6q]PhunZoid[/url] community. [url=https://github.com/PhunZoider/PhunTime]Repo and more info[/url]
 tags=
 visibility=public
