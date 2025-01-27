@@ -91,7 +91,9 @@ function Core.getClosest(playerObj, asOwner)
     end
     local x, y = playerObj:getX(), playerObj:getY()
     table.sort(houses, function(a, b)
-        return distance_squared(a, x, y) < distance_squared(b, x, y)
+        local aClosest = Core.getClosestPoint(x, y, a:getX(), a:getY(), a:getX() + a:getW(), a:getY() + a:getH())
+        local bClosest = Core.getClosestPoint(x, y, b:getX(), b:getY(), b:getX() + b:getW(), b:getY() + b:getH())
+        return aClosest < bClosest
     end)
 
     return houses[1]
