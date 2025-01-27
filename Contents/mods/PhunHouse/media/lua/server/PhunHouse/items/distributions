@@ -3,10 +3,10 @@ require 'Vehicles/VehicleDistributions'
 require "Items/ProceduralDistributions"
 -- ArtSupplies
 table.insert(ProceduralDistributions.list["ArtSupplies"].items, "Base.HousePaint");
-table.insert(ProceduralDistributions.list["ArtSupplies"].items, 2.5);
+table.insert(ProceduralDistributions.list["ArtSupplies"].items, 5.5);
 -- CratePaint
 table.insert(ProceduralDistributions.list["ArtSupplies"].items, "Base.HousePaint");
-table.insert(ProceduralDistributions.list["ArtSupplies"].items, 2.5);
+table.insert(ProceduralDistributions.list["ArtSupplies"].items, 5.5);
 -- ToolStoreMisc
 table.insert(ProceduralDistributions.list["ToolStoreMisc"].items, "Base.HousePaint");
-table.insert(ProceduralDistributions.list["ToolStoreMisc"].items, 2.5);
+table.insert(ProceduralDistributions.list["ToolStoreMisc"].items, 5.5);
